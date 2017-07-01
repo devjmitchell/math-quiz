@@ -19,10 +19,19 @@ def play_game(player_name, difficulty_level):
 	total_wrong = 0
 
 	while True:
+		# Create random numbers based on difficulty level
 		num1 = randint(1,(5 * int(difficulty_level)))
 		num2 = randint(1,(5 * int(difficulty_level)))
-		rand_op = randint(1,4)
+
+		# Difficulty 1 is only + and -, 10 is only x and /
+		if int(difficulty_level) == 1:
+			rand_op = randint(1,2)
+		elif int(difficulty_level) == 10:
+			rand_op = randint(3,4)
+		else:
+			rand_op = randint(1,4)
 		
+		# Get math result and ask for player's guess
 		if rand_op == 1:
 			result = num1 + num2
 			guess = input('\n' + str(num1) + ' + ' + str(num2) + ' = ')
@@ -37,6 +46,7 @@ def play_game(player_name, difficulty_level):
 			result = int(num1 / num2)
 			guess = input('\n' + str(num1) + ' / ' + str(num2) + ' = ')
 
+		# Did the player guess correctly?
 		if not guess:
 			total_wrong += 1
 			print("You forgot to guess! The answer was " + str(result) + ".")
